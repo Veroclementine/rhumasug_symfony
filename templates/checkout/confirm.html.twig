@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation commande{% endblock %}
+
+{% block body %}
+
+{{ include("partials/title_section.html.twig", {'name': 'Validation Commande'}) }}
+
+<div class="section">
+	<div class="container">
+
+        <div class="row">
+        	<div class="col-md-6">
+                <div class="heading_s1">
+                        <h4>Votre adresse livraison</h4>
+                        <div class="content" id="adress">
+                        {{ adress | replace({'[sp]' : '<br>'}) | raw}}
+                        </div>
+                </div>
+                <div class="heading_s1">
+                    <h4>Votre Panier</h4>
+                    <div class="content" id="carrier">
+                        {{ carrier | replace({'[sp]' : '<br>'}) | raw}}
+                    </div>
+                </div>
+                
+                {% if informations %}
+                    <div class="heading_s1">
+                        <h4>Plus d'information</h4>
+                        <div class="form-group mb-0" id="informations">
+                        {{ informations }}
+                    </div>                    
+                {% endif %}
+
+                </div>
+          </div>
+
+        <div class="col-md-6">
+                <div class="order_review">
+                    <div class="heading_s1">
+                        <h4>Votre Panier</h4>
+                    </div>
+                    <div class="table-responsive order_table">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for element in cart.products %}
+                                    <tr>
+                                        <td> {{ element.product.name }} <span class="product-qty">x {{ element.quantity }}</span></td>
+                                        <td>{{element.product.prix/100}}€</td>
+                                    </tr>
+                            {% endfor %}
+
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Sous-total HT</th>
+                                    <td class="product-subtotal">{{ cart.data.subTotalHT }}€</td>
+                                </tr>
+                                <tr>
+                                    <th>Dont TVA</th>
+                                    <td class="product-subtotal">{{ cart.data.taxe }}€</td>
+                                </tr>
+                                
+                                <tr>
+                                    <th>Livraison ({{carrier.name}})</th>
+                                    <td class="product-subtotal">{{ carrier.price/100 }}€</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Total</th>
+                                    <td class="product-subtotal">{{ cart.data.subTotalTTC + carrier.price/100 }}€</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="payment_method">
+                        <div class="heading_s1">
+                        </div>
+                          <button type="submit" id="checkout-button" class="btn btn-fill-out btn-block">Paiement</button>
+
+                    </div>
+
+                </div>
+          </div>
+        </div>
+   
+
+    </div>
+</div>
+
+
+{% endblock %}
