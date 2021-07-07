@@ -25,10 +25,10 @@ class CheckoutController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        $user = $this->getUser();
+        $user = $this->getUser();//je recupere l'utilisateur connecté
         $cart = $this->cartServices->getFullCart();
 
-        if(!$cart){
+        if(!$cart){//si le panier est vide on l'envoie vers 'home'
             return $this->redirectToRoute("home");
         }
 

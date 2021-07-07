@@ -11,13 +11,13 @@ class CartServices{
     private $repoProduct;
     private $tva = 0.2;
 
-    public function __construct(SessionInterface $session, ProductRepository $repoProduct)
+    public function __construct(SessionInterface $session, ProductRepository $repoProduct)//injecter la session dans le parametres
     {
-        $this->session = $session;
+        $this->session = $session;//inicialicer la session
         $this->repoProduct =$repoProduct;
     }
 
-    public function addToCart($id){
+    public function addToCart($id){//methode pour ajouter 1 prod au panier
        $cart = $this->getCart();
        if(isset($cart[$id])){
            //produit deja dans le panier
@@ -30,7 +30,7 @@ class CartServices{
 
     }
 
-    public function deleteFromCart($id){
+    public function deleteFromCart($id){//methode pour suprimer 1 prod du panier
         $cart = $this->getCart();
         if(isset($cart[$id])){
             //produit deja dans le panier
@@ -44,7 +44,7 @@ class CartServices{
         }
     }
 
-    public function deleteAllToCart($id){
+    public function deleteAllToCart($id){//methode pour vider le panier
         $cart = $this->getCart();
         if(isset($cart[$id])){
                 unset($cart[$id]);
@@ -56,13 +56,13 @@ class CartServices{
         $this->updateCart([]);
     }
 
-    public function updateCart($cart){
+    public function updateCart($cart){//methode pour mettre a jour le panier
         $this->session->set('cart', $cart);
-        $this->session->set('cartData', $this->getFullCart());
+        $this->session->set('cartData', $this->getFullCart());//on prend la session et on met la clé cartData, on me le methode pour recuperer le full cart getFullCart
     }
 
     public function getCart(){
-        return $this->session->get('cart', []);
+        return $this->session->get('cart', []);//recuperer le contenu de une session
     }
 
     public function getFullCart(){

@@ -21,9 +21,9 @@ class HomeController extends AbstractController
         $products = $repoProduct->findAll();
         $homeSlider = $repoHomeSlider->findBy(['isDisplayed'=>true]);
 
-        $productPlusVendu = $repoProduct->findByPlusVendu(1);
-        $productOffert = $repoProduct->findByOffert(1);
-        $productNewProduct = $repoProduct->findByNewProduct(1);
+        $productPlusVendu = $repoProduct->findByPlusVendu(1);//Doctrine nous permet de chercher les donnes en fonction de noms de champs findByPlusVendu
+        //$productOffert = $repoProduct->findByOffert(1);
+        //$productNewProduct = $repoProduct->findByNewProduct(1);
     
         // dd([$productPlusVendu, $productOffert, $productNewProduct]);
 
@@ -31,8 +31,8 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
             'products' => $products,
             'productPlusVendu' => $productPlusVendu,
-            'productOffert' => $productOffert,
-            'NewProduct' => $productNewProduct,
+            //'productOffert' => $productOffert,
+            //'NewProduct' => $productNewProduct,
             'homeSlider' => $homeSlider,
         ]);
     }

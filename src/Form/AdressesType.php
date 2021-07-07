@@ -20,7 +20,7 @@ class AdressesType extends AbstractType
             ->add('telephone')
             ->add('ville')
             ->add('codePostal')
-            ->add('pays', CountryType::class)
+            ->add('pays', CountryType::class) //ça nous permet montrer une liste de pays.
         ;
     }
 

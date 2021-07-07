@@ -14,7 +14,7 @@ class CheckoutType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $user = $options['user'];
+        $user = $options['user'];//on veux recuperer l'adresse du user et le transporteur choisi.
 
         $builder
             ->add('adress', EntityType::class,[
@@ -40,7 +40,7 @@ class CheckoutType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            // Configurer nous form options ici
             'user'=> array(),
         ]);
     }

@@ -44,14 +44,14 @@ class AdressesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user = $this ->getUser();
-            $adress->setUser($user);
+            $user = $this ->getUser(); 
+            $adress->setUser($user);  //ça nous recuperer l'utilisateur qui est connecté
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($adress);
             $entityManager->flush();
 
             if($cartServices->getFullCart()){
-                return $this->redirectToRoute('checkout');
+                return $this->redirectToRoute('account');
             }
 
             $this->addFlash('adress_message', 'Votre adresse a été bien enregistrée');
